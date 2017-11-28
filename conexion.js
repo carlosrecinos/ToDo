@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var Promise = mongoose.connect('mongodb://localhost:27017/todo',{useMongoClient : true},(err,res)=>{
+var Promise = mongoose.connect('mongodb://admin:admin@ds047762.mlab.com:47762/tareas',{useMongoClient : true},(err,res)=>{
     if(err){
         console.log("Error en la bd : "+err)
     }else{

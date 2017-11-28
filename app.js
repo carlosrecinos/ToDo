@@ -8,7 +8,7 @@ var app = express();
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-app.listen(3001,(req,res)=>{
+app.listen(3005,(req,res)=>{
     console.log('Servidor corriendo en puerto 3001');
 });
 
@@ -16,21 +16,14 @@ app.get('/',(req,res)=>{
     res.status(200).send({message : 'Index'});
 });
 
-app.get('/tareas',middleware.isAuth,ControlTarea.mostrarTareas);
-
+app.get('/tareas',ControlTarea.mostrarTareas);
 app.get('/tareas/:idTarea',middleware.isAuth,ControlTarea.mostrarTarea);
-
 app.post('/tareas',middleware.isAuth,ControlTarea.insertarTarea);
-
 app.put('/tareas/:idTarea',middleware.isAuth,ControlTarea.modificarTarea);
-
 app.delete('/tareas/:idTarea',middleware.isAuth,ControlTarea.eliminarTarea);
-
-app.post('/registrar',middleware.isAuth,autenticacion.registrar);
-
+app.post('/registrar',autenticacion.registrar);
 app.put('/tareas/finalizar/:idTarea',middleware.isAuth,ControlTarea.finalizarTarea);
-
-app.get('/login',middleware.isAuth,(req,res)=>{
+app.get('/login',(req,res)=>{
     res.send({mensaje:"Acceso permitido",usuario : req.payload});
 });
 

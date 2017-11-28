@@ -11,7 +11,6 @@ module.exports.crearToken = function(user){
     exp : moment().add(14,'days').unix(),
     };
     return jwt.encode(payload,config.SECRET_TOKEN);
-
 }
 
 module.exports.encriptar = function(user,next){

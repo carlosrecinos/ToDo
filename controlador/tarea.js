@@ -1,12 +1,17 @@
 var Tarea = require('../modelo/Tarea');
 
 module.exports.mostrarTareas = function(req,res){
-    Tarea.find({autor:req.payload.sub},(err,tareas)=>{
+    console.log(req.ip)
+    Tarea.find({},(err,tareas)=>{
         if(err){
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.status(500).send({mensaje: "Error: "+err});
         }else if(!tareas){
             res.status(404).send({mensaje: "No se encontró la tarea: "+err});
         }else{
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.status(200).send(tareas);
         }
     });

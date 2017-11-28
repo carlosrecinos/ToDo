@@ -31,7 +31,7 @@ module.exports.ingresar = function(req,res){
         if(!user) return res.status(404).send({mensaje: "No existe este usuario"});
         var aut = bcrypt.compareSync(pass,user.pass);
         if(aut){
-            res.status(200).send({mensaje: "Te has logueado", token:  service.crearToken(user),
+            res.status(200).send({token:  service.crearToken(user),
             usuario:user});
         }else if(!aut){
             res.status(404).send({mensaje: "Usted no tiene acceso"});

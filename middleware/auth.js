@@ -6,7 +6,10 @@ var Usuario = require('../modelo/Usuario');
 module.exports.isAuth = function(req,res,next){
     
     if(!req.headers.authorization){
-        return res.status(403).send({mensaje :"Prohibido el acceso"});
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        res.status(200).send({mensaje :"Prohibido el acceso"});
+        return res
     }
     var token = req.headers.authorization.split(" ")[1];
     var payload = jwt.decode(token,config.SECRET_TOKEN);

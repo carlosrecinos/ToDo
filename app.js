@@ -9,7 +9,7 @@ var app = express();
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.listen(3005,(req,res)=>{
-    console.log('Servidor corriendo en puerto 3001');
+    console.log('Servidor corriendo en puerto 3005');
 });
 
 app.get('/',(req,res)=>{

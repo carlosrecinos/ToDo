@@ -20,14 +20,11 @@ app.get('/tareas',ControlTarea.mostrarTareas);
 app.get('/tareas/:idTarea',middleware.isAuth,ControlTarea.mostrarTarea);
 app.post('/tareas',middleware.isAuth,ControlTarea.insertarTarea);
 app.put('/tareas/:idTarea',middleware.isAuth,ControlTarea.modificarTarea);
-app.delete('/tareas/:idTarea',middleware.isAuth,ControlTarea.eliminarTarea);
+app.delete('/tareas/:idTarea',ControlTarea.eliminarTarea);
 app.post('/registrar',autenticacion.registrar);
-app.put('/tareas/finalizar/:idTarea',middleware.isAuth,ControlTarea.finalizarTarea);
+app.put('/tareas/finalizar/:idTarea',ControlTarea.finalizarTarea);
 app.get('/login',(req,res)=>{
     res.send({mensaje:"Acceso permitido",usuario : req.payload});
 });
 
 //app.post('/login',autenticacion.ingresar);
-
-
-

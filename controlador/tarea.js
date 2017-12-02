@@ -50,20 +50,20 @@ module.exports.insertarTarea = (req,res) => {
     tarea.titulo = req.body.titulo;
     tarea.descripcion = req.body.descripcion;
     tarea.fechaEntrega = req.body.fechaEntrega;
-    //tarea.entregado = req.body.entregado;
-    tarea.autor = req.payload.sub;
+    tarea.autor = req.body.autor;
 
     tarea.save((err,tareaInsertada)=>{
         if(err){
             res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Methods", "GET, POST, PUT")
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-            res.status(500).send({mensaje: "Error: "+err});
+            res.status(200).send({mensaje: "Error: "+err});
+            console.log("ERROR: ",err)
         }else{
             res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Methods", "GET, POST, PUT")
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-            res.status(500).send({mensaje: "Tarea insertada: "+tareaInsertada});
+            res.status(200).send({mensaje: "Tarea insertada: "+tareaInsertada});
         }
     });
 }
@@ -71,8 +71,11 @@ module.exports.insertarTarea = (req,res) => {
 module.exports.modificarTarea = (req,res) => {
     var id = req.params.idTarea;
     var actualizacion = req.body;
+    console.log("entro")
+    console.log(req.body)
     Tarea.findByIdAndUpdate(id,actualizacion,(err,tarea)=>{
         if(err){
+            console.log("error, "+err)
             res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Methods", "GET, POST, PUT")
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -83,6 +86,8 @@ module.exports.modificarTarea = (req,res) => {
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.status(404).send({mensaje: "No se encontró la tarea: "+err});
         }else{
+            console.log("Actualiza")
+            console.log(req.body)
             res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Methods", "GET, POST, PUT")
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -92,6 +97,7 @@ module.exports.modificarTarea = (req,res) => {
 }
 
 module.exports.eliminarTarea = (req,res)=>{
+
     var id = req.params.idTarea;
     Tarea.findById(id,(err,tarea)=>{
         if(err){

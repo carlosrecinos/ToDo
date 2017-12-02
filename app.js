@@ -18,8 +18,8 @@ app.get('/',(req,res)=>{
 
 app.get('/tareas',ControlTarea.mostrarTareas);
 app.get('/tareas/:idTarea',middleware.isAuth,ControlTarea.mostrarTarea);
-app.post('/tareas',middleware.isAuth,ControlTarea.insertarTarea);
-app.put('/tareas/:idTarea',middleware.isAuth,ControlTarea.modificarTarea);
+app.post('/tareas',ControlTarea.insertarTarea);
+app.put('/tareas/:idTarea',ControlTarea.modificarTarea);
 app.delete('/tareas/:idTarea',ControlTarea.eliminarTarea);
 app.post('/registrar',autenticacion.registrar);
 app.put('/tareas/finalizar/:idTarea',ControlTarea.finalizarTarea);

@@ -16,6 +16,12 @@ app.get('/',(req,res)=>{
     res.status(200).send({message : 'Index'});
 });
 
+app.use(function(req,res,next){
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+})
+
 app.get('/tareas',ControlTarea.mostrarTareas);
 app.get('/tareas/:idTarea',middleware.isAuth,ControlTarea.mostrarTarea);
 app.post('/tareas',ControlTarea.insertarTarea);

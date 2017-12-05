@@ -1,5 +1,5 @@
 var Tarea = require('../modelo/Tarea');
-
+var moment = require('moment');
 module.exports.mostrarTareas = function(req,res){
     console.log(req.ip)
     Tarea.find({},(err,tareas)=>{
@@ -50,6 +50,7 @@ module.exports.insertarTarea = (req,res) => {
     tarea.titulo = req.body.titulo;
     tarea.descripcion = req.body.descripcion;
     tarea.fechaEntrega = req.body.fechaEntrega;
+    console.log("Fecha: " + tarea.fechaEntrega)
     tarea.autor = req.body.autor;
 
     tarea.save((err,tareaInsertada)=>{

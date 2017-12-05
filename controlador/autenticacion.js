@@ -24,17 +24,17 @@ module.exports.registrar = function (req,res){
 module.exports.ingresar = function(req,res){
     var email = req.body.email;
     var pass = req.body.pass;
-    
+
     Usuario.findOne({email:req.body.email},(err,user)=>{
-        
+
         if(err)return res.status(500).send({mensaje: "Error: "+err});
-        if(!user) return res.status(404).send({mensaje: "No existe este usuario"});
+        if(!user) return res.status(404).send({mensaje: "No existe este usuario " + email });
         var aut = bcrypt.compareSync(pass,user.pass);
         if(aut){
             res.status(200).send({token:  service.crearToken(user),
             usuario:user});
         }else if(!aut){
-            res.status(404).send({mensaje: "Usted no tiene acceso"});
+            res.status(404).send({mensaje: "Datos incorrectos"});
         }
     });
 }

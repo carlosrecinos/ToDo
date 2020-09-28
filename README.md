@@ -9,7 +9,7 @@
 * MongoDB
 * Mongoose
 
-#### for web app with the features of  
+#### providing api endpoints for
 * create
 * edit
 * complete
